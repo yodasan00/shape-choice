@@ -54,14 +54,11 @@
         }
 
         function assignShape() {
-            // Generate a random shape
-            let assignedShape = sessionStorage.getItem("assignedShape");
-            if (!assignedShape) {
-                assignedShape = shapes[Math.floor(Math.random() * shapes.length)];
-                sessionStorage.setItem("assignedShape", assignedShape);
-            }
+            let index = parseInt(sessionStorage.getItem("shapeIndex")) || 0;
+            let assignedShape = shapes[index];
             
-            // Display the assigned shape
+            sessionStorage.setItem("shapeIndex", (index + 1) % shapes.length);
+            
             document.getElementById("shapeDisplay").innerText = `Your assigned shape: ${assignedShape}`;
             drawShape(assignedShape);
         }
